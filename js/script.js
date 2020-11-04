@@ -4,7 +4,7 @@ var pr = document.getElementById("principal");
 var rd = document.getElementById("rodape");
 // codigo do card dos produtos
 
-fetch("http://10.26.45.43:4500/listar")
+fetch("http://localhost:4500/listar")
   .then((res) => res.json())
   .then((dados) => {
     cb.innerHTML = dados[0].header;
@@ -46,3 +46,80 @@ fetch("http://10.26.45.43:4500/listar")
     rd.innerHTML = dados[0].footer;
   })
   .catch((erro) => console.error(`error ao tentar ler a api${erro}`));
+
+// código para cadastrar os dados do formulario
+function cadastrar() {
+  var nome = document.getElementById("txtnome");
+  var descricao = document.getElementById("txtdescricao");
+  var preco = document.getElementById("txtpreco");
+  var imagem = document.getElementById("txtimagem");
+
+  // receita de bolo
+
+  fetch("http://localhost:4500/cadastrar", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      nome: nome.value,
+      descricao: descricao.value,
+      preco: preco.value,
+      imagem: imagem.value,
+    }),
+  })
+    .then((response) => response.json())
+    .then((rs) => console.log(rs))
+    .catch((erro) => console.error(`Erro ao tentar cadastrar ${erro}`));
+}
+function atualizar() {
+  var idproduto = document.getElementById("idproduto");
+  var nome = document.getElementById("txtnome");
+  var descricao = document.getElementById("txtdescricao");
+  var preco = document.getElementById("txtpreco");
+  var imagem = document.getElementById("txtimagem");
+
+  // receita de bolo
+
+  fetch("http://localhost:4500/atualizar", {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      idproduto: idproduto.value,
+      nome: nome.value,
+      descricao: descricao.value,
+      preco: preco.value,
+      imagem: imagem.value,
+    }),
+  })
+    .then((response) => response.json())
+    .then((rs) => console.log(rs))
+    .catch((erro) => console.error(`Erro ao tentar atualizar ${erro}`));
+}
+// codigo para apagar os produtos
+function apagar() {
+  var idproduto = document.getElementById("idproduto");
+
+  // receita de bolo
+
+  fetch("http://localhost:4500/apagar", {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      idproduto: idproduto.value,
+    }),
+  })
+    .then((response) => response.json())
+    .then((rs) => console.log(rs))
+    .catch((erro) => {
+      alert("produto apagado");
+      console.error(`Erro ao tentar apagar o produto ${erro}`);
+    });
+}

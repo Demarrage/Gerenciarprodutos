@@ -38,12 +38,24 @@
       <!--Fim da barra de navegação -->
     </header>
     <main class="container">
+      <h2>Atualizar produtos</h2>
+      <form onsubmit="return false">
+      <label>Id do Produto</label>
+      <select id="idproduto">
+        <option value="Selecione">Selecione</option>
+        <script>
+          for (var i = 1; i <= 300; i++) {
+            document.getElementById("produto").innerHTML +=
+              "<option value=" + i + ">" + i + "</option>";
+          }
+        </script>
+      </select>
       <form onsubmit="return false">
         <input type="text" id="txtnome" placeholder="Nome Produtos" />
         <textarea id="txtdescricao" placeholder="descricao"></textarea>
         <input type="text" id="txtpreco" placeholder="preco" />
         <input type="text" id="txtimagem" placeholder="imagem" />
-        <button id="btncadastrar" onclick="cadastrar()">Cadastrar</button>
+        <button id="btnatualizar" onclick="atualizar()">Atualizar</button>
       </form>
     </main>
     <footer id="rodape"></footer>
